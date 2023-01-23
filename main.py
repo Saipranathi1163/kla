@@ -1,49 +1,39 @@
-# with open('1.txt','r') as f:
-#     content = f.read()
-#     temp = content.split('\n')
-#     n = len(temp)
-#     dummy = []
-#     res = []
-#     for i in range(n):
-#         #print(i,temp[i])
-        
-#         if temp[i] == 'boundary':
-#             dummy=temp[:i]
-#             res.append(dummy)
-#             temp = temp[i:]
-#             break
-#     n = len(temp)
-#     ls = []
-    
-#     ct = 0
-#     for i in temp:
-#         if i == 'boundary' and ct<3:
-#             ls = ls[:-1]
-#             res.append(''.join(ls))
-#             res.append('\n')
-#             ls = []
-#             ct += 1
-#             #print("ct",ct)
-#         s = i.split(' ')
-#         for j in s:
-#             if j == '':
-#                 pass
-#             ls.append(j)
-#             ls.append(' ')
-        
-#     for i in ls:
-#         if i == '':
-#             ls.remove(i)
-# res=res[1:-1]
-# print(dummy)
-# print(res)
-# print(''.join(res))
-# fp = open("op1.txt",'w')
-# fp.write(''.join(res))
-# fp.close()
-# f.close()
 
-#print(n,len(temp)
+def polygonArea(X, Y, n):
+    area = 0.0
+    j = n - 1
+    for i in range(0,n):
+        area += (int(X[j]) + int(X[i])) * (int(Y[j]) - int(Y[i]))
+        j = i   
+    return int(abs(area / 2.0))
+
+def distance(X, Y, n):
+    d = []
+    x = int(X[0])
+    y = int(Y[0])
+    for i in range(1,n):
+        dist = pow(((int(X[i])-x)**2 + (int(Y[i])- y)**2),0.5)
+        d.append(dist)
+    return d.sort()
+
+def angle(points):
+    n = len(points)
+    angles = []
+    for i in range(n - 2):
+        p1, p2, p3 = points[i], points[i+1], points[i+2]
+        s1 , s2 = 0, 0
+        if((p1[0]-p2[0]) != 0):
+            s1 = (p1[1]-p2[1])/(p1[0]-p2[0])
+        else:
+            angles.append(float('INF'))
+            pass
+        if((p2[0]-p3[0]) != 0):
+            s2 = (p2[1]-p3[1])/(p2[0]-p3[0])
+        else:
+            angles.append(float('INF'))
+            pass
+        angles.append((s1-s2)/(1+(s1*s2)))
+    return angles.sort()
 
 
 '''1'''
@@ -68,28 +58,11 @@ with open('1.txt','r') as f:
 f1.close()
 f.close()
 
+
 '''2'''
-def polygonArea(X, Y, n):
-    area = 0.0
-    j = n - 1
-    for i in range(0,n):
-        area += (int(X[j]) + int(X[i])) * (int(Y[j]) - int(Y[i]))
-        j = i   
-    return int(abs(area / 2.0))
-
-def distance(X, Y, n):
-    d = []
-    x = int(X[0])
-    y = int(Y[0])
-    for i in range(1,n):
-        dist = pow(((int(X[i])-x)**2 + (int(Y[i])- y)**2),0.5)
-        d.append(dist)
-    return d.sort()
-
 
 f1 = open('2.txt','r')
 f2 = open("op2.txt",'w')
-st = ''
 refArea = 0.0
 refSides = 0
 refDist = []
@@ -104,12 +77,10 @@ with open('poi2.txt','r') as f:
                 temp = ls[j].split(' ')
                 x.append(temp[0])
                 y.append(temp[1])
-            #print(ls)
-            #print(x,y)
             refArea = polygonArea(x, y, n-2)
             refSides = len(x)
             refDist = distance(x,y,refSides)
-print("ref area , ref sides", refArea,refSides)
+#print("ref area , ref sides", refArea,refSides)
 flag1 = 0
 flag2 = 0
 with open('2.txt','r') as f1:
@@ -118,7 +89,6 @@ with open('2.txt','r') as f1:
     for i in lines:
         if 'boundary' in i:
             flag1 = 1
-            #res.append(i)
         if flag1 == 1:
             if 'xy' in i:
                 ls = i.split('  ')
@@ -128,26 +98,22 @@ with open('2.txt','r') as f1:
                     temp = ls[j].split(' ')
                     x.append(temp[0])
                     y.append(temp[1])
-                #print(ls)
-                #print(x,y)
                 area = polygonArea(x, y, n-2)
                 dist = distance(x,y,len(x))
                 if area == refArea and n-2 == refSides and refDist == dist:
                     flag2 = 1
             res.append(i)
         if 'endel' in i:
-            #res.append(i)
             if flag2 == 1:
                 s = "".join(res)
-                #print("s",s)
                 f2.write(s)
             flag2 = 0
             flag1 = 0
             res = []
-        
-#print(res)
 
+        
 '''3'''
+
 f1 = open('3.txt','r')
 f2 = open("op3.txt",'w')
 refArea = 0.0
@@ -167,7 +133,7 @@ with open('poi3.txt','r') as f:
             #print(x,y)
             refArea = polygonArea(x, y, n-2)
             refSides = len(x)
-print("ref area , ref sides", refArea,refSides)
+#print("ref area , ref sides", refArea,refSides)
 flag1 = 0
 flag2 = 0
 with open('3.txt','r') as f1:
@@ -201,20 +167,76 @@ with open('3.txt','r') as f1:
             flag2 = 0
             flag1 = 0
             res = []
+
         
 '''4'''
-#65.912
-# def perimeter(X, Y, n):
-#     area = 0.0
-#     j = n - 1
-#     for i in range(0,n):
-#         area += (int(X[j]) + int(X[i])) * (int(Y[j]) - int(Y[i]))
-#         j = i   
-#     return int(abs(area / 2.0))
+#APPROACH 1
+# using area, angle, num of sides
+'''
+f1 = open('4.txt','r')
+f2 = open("op4.txt",'w')
+refArea = 0.0
+refSides = 0
+refAngle = []
+with open('poi4.txt','r') as f:
+    lines = f.readlines()
+    for i in lines:
+        if 'xy' in i:
+            ls = i.split('  ')
+            x, y = [], []
+            n = len(ls)
+            coordinates = []
+            for j in range(2,n):
+                temp = ls[j].split(' ')
+                x.append(temp[0])
+                y.append(temp[1])
+                coordinates.append([int(temp[0]),int(temp[1])])
+            refArea = polygonArea(x, y, n-2)
+            refSides = len(x)
+            refAngle = angle(coordinates)
+
+flag1 = 0
+flag2 = 0
+with open('4.txt','r') as f1:
+    lines = f1.readlines()
+    res = []
+    for i in lines:
+        if 'boundary' in i:
+            flag1 = 1
+        if flag1 == 1:
+            if 'xy' in i:
+                ls = i.split('  ')
+                x, y = [], []
+                n = len(ls)
+                coordinates = []
+                for j in range(2,n):
+                    temp = ls[j].split(' ')
+                    x.append(temp[0])
+                    y.append(temp[1])
+                    coordinates.append([int(temp[0]),int(temp[1])])
+                
+                area = polygonArea(x, y, n-2)
+                ang = angle(coordinates)
+
+                #comparing angles,area,num of sides of the cur polygon with target polygon
+                if ang == refAngle and area == refArea  and len(x) == refSides:
+                    flag2 = 1
+            res.append(i)
+        if 'endel' in i:
+            if flag2 == 1:
+                s = "".join(res)
+                f2.write(s)
+            flag2 = 0
+            flag1 = 0
+            res = []
+'''
+
+#APPROACH 2
 
 f1 = open('4.txt','r')
 f2 = open("op4.txt",'w')
-ref = []
+refArea = 0.0
+refSides = 0
 with open('poi4.txt','r') as f:
     lines = f.readlines()
     for i in lines:
@@ -226,10 +248,11 @@ with open('poi4.txt','r') as f:
                 temp = ls[j].split(' ')
                 x.append(temp[0])
                 y.append(temp[1])
-            dist = distance(x, y, len(x))
             #print(ls)
             #print(x,y)
-            ref.append([polygonArea(x, y, n-2),len(x),dist])
+            refArea = polygonArea(x, y, n-2)
+            refSides = len(x)
+#print("ref area , ref sides", refArea,refSides)
 flag1 = 0
 flag2 = 0
 with open('4.txt','r') as f1:
@@ -251,9 +274,129 @@ with open('4.txt','r') as f1:
                 #print(ls)
                 #print(x,y)
                 area = polygonArea(x, y, n-2)
-                sides = n-2
-                dist = distance(x, y, len(x))
-                temp=[area, sides, dist]
+                if area == refArea and n-2 == refSides:
+                    flag2 = 1
+            res.append(i)
+        if 'endel' in i:
+            #res.append(i)
+            if flag2 == 1:
+                s = "".join(res)
+                #print("s",s)
+                f2.write(s)
+            flag2 = 0
+            flag1 = 0
+            res = []
+
+
+
+
+'''5'''
+
+f1 = open('5.txt','r')
+f2 = open("op5.txt",'w')
+refArea = 0.0
+refSides = 0
+with open('poi5.txt','r') as f:
+    lines = f.readlines()
+    for i in lines:
+        if 'xy' in i:
+            ls = i.split('  ')
+            x, y = [], []
+            n = len(ls)
+            for j in range(2,n):
+                temp = ls[j].split(' ')
+                x.append(temp[0])
+                y.append(temp[1])
+            #print(ls)
+            #print(x,y)
+            refArea = polygonArea(x, y, n-2)
+            refSides = len(x)
+#print("ref area , ref sides", refArea,refSides)
+flag1 = 0
+flag2 = 0
+with open('5.txt','r') as f1:
+    lines = f1.readlines()
+    res = []
+    for i in lines:
+        if 'boundary' in i:
+            flag1 = 1
+            #res.append(i)
+        if flag1 == 1:
+            if 'xy' in i:
+                ls = i.split('  ')
+                x, y = [], []
+                n = len(ls)
+                for j in range(2,n):
+                    temp = ls[j].split(' ')
+                    x.append(temp[0])
+                    y.append(temp[1])
+                #print(ls)
+                #print(x,y)
+                area = polygonArea(x, y, n-2)
+                if area == refArea and n-2 == refSides:
+                    flag2 = 1
+            res.append(i)
+        if 'endel' in i:
+            #res.append(i)
+            if flag2 == 1:
+                s = "".join(res)
+                #print("s",s)
+                f2.write(s)
+            flag2 = 0
+            flag1 = 0
+            res = []
+
+
+'''6'''
+f1 = open('6.txt','r')
+f2 = open("op6.txt",'w')
+refArea = 0.0
+refSides = 0
+ref = []
+with open('poi6.txt','r') as f:
+    lines = f.readlines()
+    for i in lines:
+        if 'xy' in i:
+            ls = i.split('  ')
+            x, y = [], []
+            n = len(ls)
+            coordinates = []
+            refDist = []
+            for j in range(2,n):
+                temp = ls[j].split(' ')
+                x.append(temp[0])
+                y.append(temp[1])
+                coordinates.append([int(temp[0]),int(temp[1])])
+            #print(ls)
+            #print(x,y)
+            refArea = polygonArea(x, y, n-2)
+            refSides = len(x)
+            refAngles = angle(coordinates)
+            ref.append([refArea,refSides,refAngles])
+
+flag1 = 0
+flag2 = 0
+with open('6.txt','r') as f1:
+    lines = f1.readlines()
+    res = []
+    for i in lines:
+        if 'boundary' in i:
+            flag1 = 1
+            #res.append(i)
+        if flag1 == 1:
+            if 'xy' in i:
+                ls = i.split('  ')
+                x, y = [], []
+                n = len(ls)
+                coordinates = []
+                for j in range(2,n):
+                    temp = ls[j].split(' ')
+                    x.append(temp[0])
+                    y.append(temp[1])
+                    coordinates.append([int(temp[0]),int(temp[1])])
+                area = polygonArea(x, y, n-2)
+                angles = angle(coordinates)
+                temp=[area,n-2,angles]
                 if temp in ref:
                     flag2 = 1
             res.append(i)
@@ -266,8 +409,60 @@ with open('4.txt','r') as f1:
             flag2 = 0
             flag1 = 0
             res = []
-f.close()
-f1.close()
-f2.close()
-print(ref)
+
+
+'''7'''
+
+f1 = open('7.txt','r')
+f2 = open("op7.txt",'w')
+refArea = 0.0
+refSides = 0
+ref = []
+with open('poi7.txt','r') as f:
+    lines = f.readlines()
+    for i in lines:
+        if 'xy' in i:
+            ls = i.split('  ')
+            x, y = [], []
+            n = len(ls)
+            for j in range(2,n):
+                temp = ls[j].split(' ')
+                x.append(temp[0])
+                y.append(temp[1])
+            
+            refArea = polygonArea(x, y, n-2)
+            refSides = len(x)
+            ref.append([refArea,refSides])
+flag1 = 0
+flag2 = 0
+with open('7.txt','r') as f1:
+    lines = f1.readlines()
+    res = []
+    for i in lines:
+        if 'boundary' in i:
+            flag1 = 1
+        if flag1 == 1:
+            if 'xy' in i:
+                ls = i.split('  ')
+                x, y = [], []
+                n = len(ls)
+                for j in range(2,n):
+                    temp = ls[j].split(' ')
+                    x.append(temp[0])
+                    y.append(temp[1])
+                area = polygonArea(x, y, n-2)
+                temp=[area,n-2]
+                if temp in ref:
+                    flag2 = 1
+            res.append(i)
+        if 'endel' in i:
+            #res.append(i)
+            if flag2 == 1:
+                s = "".join(res)
+                f2.write(s)
+            flag2 = 0
+            flag1 = 0
+            res = []
+
+
 
