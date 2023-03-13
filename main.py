@@ -171,64 +171,6 @@ with open('3.txt','r') as f1:
 '''4'''
 #APPROACH 1
 # using area, angle, num of sides
-'''
-f1 = open('4.txt','r')
-f2 = open("op4.txt",'w')
-refArea = 0.0
-refSides = 0
-refAngle = []
-with open('poi4.txt','r') as f:
-    lines = f.readlines()
-    for i in lines:
-        if 'xy' in i:
-            ls = i.split('  ')
-            x, y = [], []
-            n = len(ls)
-            coordinates = []
-            for j in range(2,n):
-                temp = ls[j].split(' ')
-                x.append(temp[0])
-                y.append(temp[1])
-                coordinates.append([int(temp[0]),int(temp[1])])
-            refArea = polygonArea(x, y, n-2)
-            refSides = len(x)
-            refAngle = angle(coordinates)
-
-flag1 = 0
-flag2 = 0
-with open('4.txt','r') as f1:
-    lines = f1.readlines()
-    res = []
-    for i in lines:
-        if 'boundary' in i:
-            flag1 = 1
-        if flag1 == 1:
-            if 'xy' in i:
-                ls = i.split('  ')
-                x, y = [], []
-                n = len(ls)
-                coordinates = []
-                for j in range(2,n):
-                    temp = ls[j].split(' ')
-                    x.append(temp[0])
-                    y.append(temp[1])
-                    coordinates.append([int(temp[0]),int(temp[1])])
-                
-                area = polygonArea(x, y, n-2)
-                ang = angle(coordinates)
-
-                #comparing angles,area,num of sides of the cur polygon with target polygon
-                if ang == refAngle and area == refArea  and len(x) == refSides:
-                    flag2 = 1
-            res.append(i)
-        if 'endel' in i:
-            if flag2 == 1:
-                s = "".join(res)
-                f2.write(s)
-            flag2 = 0
-            flag1 = 0
-            res = []
-'''
 
 #APPROACH 2
 
@@ -279,7 +221,6 @@ with open('4.txt','r') as f1:
             #res.append(i)
             if flag2 == 1:
                 s = "".join(res)
-                #print("s",s)
                 f2.write(s)
             flag2 = 0
             flag1 = 0
