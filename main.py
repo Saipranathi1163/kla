@@ -399,4 +399,3 @@ with open('7.txt','r') as f1:
             res = []
 
 
-
