@@ -1,5 +1,5 @@
 
-def polygonArea(X, Y, n):
+def polygonn_area(X, Y, n):
     area = 0.0
     j = n - 1
     for i in range(0,n):
