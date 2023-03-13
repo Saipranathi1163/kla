@@ -37,7 +37,7 @@ def angle(points):
 
 
 '''1'''
-
+x = 0
 ct = 0
 #new line 
 flag = 0
