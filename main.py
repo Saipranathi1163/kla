@@ -151,8 +151,7 @@ with open('3.txt','r') as f1:
                     temp = ls[j].split(' ')
                     x.append(temp[0])
                     y.append(temp[1])
-                #print(ls)
-                #print(x,y)
+               
                 area = polygonArea(x, y, n-2)
                 if area == refArea and n-2 == refSides:
                     flag2 = 1
@@ -189,8 +188,7 @@ with open('poi4.txt','r') as f:
                 temp = ls[j].split(' ')
                 x.append(temp[0])
                 y.append(temp[1])
-            #print(ls)
-            #print(x,y)
+           
             refArea = polygonArea(x, y, n-2)
             refSides = len(x)
 #print("ref area , ref sides", refArea,refSides)
