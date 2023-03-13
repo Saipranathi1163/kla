@@ -129,8 +129,7 @@ with open('poi3.txt','r') as f:
                 temp = ls[j].split(' ')
                 x.append(temp[0])
                 y.append(temp[1])
-            #print(ls)
-            #print(x,y)
+           
             refArea = polygonArea(x, y, n-2)
             refSides = len(x)
 #print("ref area , ref sides", refArea,refSides)
@@ -271,8 +270,7 @@ with open('4.txt','r') as f1:
                     temp = ls[j].split(' ')
                     x.append(temp[0])
                     y.append(temp[1])
-                #print(ls)
-                #print(x,y)
+               
                 area = polygonArea(x, y, n-2)
                 if area == refArea and n-2 == refSides:
                     flag2 = 1
@@ -307,8 +305,7 @@ with open('poi5.txt','r') as f:
                 temp = ls[j].split(' ')
                 x.append(temp[0])
                 y.append(temp[1])
-            #print(ls)
-            #print(x,y)
+           
             refArea = polygonArea(x, y, n-2)
             refSides = len(x)
 #print("ref area , ref sides", refArea,refSides)
@@ -330,8 +327,7 @@ with open('5.txt','r') as f1:
                     temp = ls[j].split(' ')
                     x.append(temp[0])
                     y.append(temp[1])
-                #print(ls)
-                #print(x,y)
+                
                 area = polygonArea(x, y, n-2)
                 if area == refArea and n-2 == refSides:
                     flag2 = 1
@@ -367,8 +363,7 @@ with open('poi6.txt','r') as f:
                 x.append(temp[0])
                 y.append(temp[1])
                 coordinates.append([int(temp[0]),int(temp[1])])
-            #print(ls)
-            #print(x,y)
+           
             refArea = polygonArea(x, y, n-2)
             refSides = len(x)
             refAngles = angle(coordinates)
