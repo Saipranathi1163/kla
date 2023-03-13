@@ -1,18 +1,18 @@
 
-def polygon_area(X, Y, n):
+def polygon_area(x_list, y_list, n):
     area = 0.0
     j = n - 1
     for i in range(0,n):
-        area += (int(X[j]) + int(X[i])) * (int(Y[j]) - int(Y[i]))
+        area += (int(x_list[j]) + int(x_list[i])) * (int(y_list[j]) - int(y_list[i]))
         j = i   
     return int(abs(area / 2.0))
 
-def distance(X, Y, n):
+def distance(x_list, y_list, n):
     d = []
-    x = int(X[0])
-    y = int(Y[0])
+    x = int(x_list[0])
+    y = int(y_list[0])
     for i in range(1,n):
-        dist = pow(((int(X[i])-x)**2 + (int(Y[i])- y)**2),0.5)
+        dist = pow(((int(x_list[i])-x)**2 + (int(y_list[i])- y)**2),0.5)
         d.append(dist)
     return d.sort()
 
